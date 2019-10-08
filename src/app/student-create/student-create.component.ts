@@ -10,7 +10,11 @@ import {Student} from '../shared/models/Student';
   encapsulation: ViewEncapsulation.None
 })
 export class StudentCreateComponent implements OnInit {
-  student: Student;
+  student: Student = {
+    name: '',
+    phone: 0,
+    email: ''
+  };
 
   constructor(
     private studentService: StudentService,
