@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StudentService} from '../shared/services/student.service';
+import {Student} from '../shared/models/Student';
 
 @Component({
   selector: 'app-student-detail',
@@ -9,9 +10,13 @@ import {StudentService} from '../shared/services/student.service';
   encapsulation: ViewEncapsulation.None
 })
 export class StudentDetailComponent implements OnInit {
-  student = {};
+  student: Student;
 
-  constructor(private route: ActivatedRoute, private router: Router, private studentService: StudentService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private studentService: StudentService
+  ) {
   }
 
   ngOnInit() {
@@ -21,7 +26,6 @@ export class StudentDetailComponent implements OnInit {
   getStudentDetail(id) {
     this.studentService.getStudentById(id)
       .subscribe(data => {
-        console.log(data);
         this.student = data;
       });
   }
