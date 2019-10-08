@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Student} from '../models/Student';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 
 export class StudentService {
-  private baseUrl = 'http://localhost:3000/users';
+  private baseUrl = `${environment.apiUrl}/students`;
 
   constructor(private http: HttpClient) {
   }
