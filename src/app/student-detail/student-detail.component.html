@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>
+        <a [routerLink]="['/students']" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        </a>
+        {{ student.name }}
+    </h1>
+    <dl class="list">
+        <dt>Phone</dt>
+        <dd>{{ student.phone }}</dd>
+        <dt>Email</dt>
+        <dd>{{ student.email }}</dd>
+    </dl>
+    <a [routerLink]="['/student-edit', student.id]" class="btn btn-success">EDIT</a>
+    <button class="btn btn-danger" type="submit" (click)="deleteStudent(student.id)">DELETE</button>
+</div>
