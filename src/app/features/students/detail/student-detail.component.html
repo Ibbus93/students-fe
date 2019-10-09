@@ -11,6 +11,6 @@
         <dt>Email</dt>
         <dd>{{ student.email }}</dd>
     </dl>
-    <a [routerLink]="['/student-edit', student.id]" class="btn btn-success">EDIT</a>
+    <a [routerLink]="['../../edit', student.id]" class="btn btn-success">EDIT</a>
     <button class="btn btn-danger" type="submit" (click)="deleteStudent(student.id)">DELETE</button>
 </div>

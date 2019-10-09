@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {StudentService} from '../shared/services/student.service';
-import {Student} from '../shared/models/Student';
+import {StudentService} from '../../../shared/services/student.service';
+import {Student} from '../../../shared/models/Student';
 
 @Component({
   selector: 'app-student-create',

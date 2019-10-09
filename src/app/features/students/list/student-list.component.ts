@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {StudentService} from '../shared/services/student.service';
-import {Student} from '../shared/models/Student';
+import {StudentService} from '../../../shared/services/student.service';
+import {Student} from '../../../shared/models/Student';
 
 @Component({
   selector: 'app-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  templateUrl: './student-list.component.html',
+  styleUrls: ['./student-list.component.css']
 })
-export class StudentComponent implements OnInit {
+export class StudentListComponent implements OnInit {
   students: Array<Student>;
 
   constructor(

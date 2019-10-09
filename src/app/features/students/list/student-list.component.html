@@ -1,7 +1,7 @@
 <div class="container">
     <h1>
         Students list
-        <a [routerLink]="['/student-create']" class="btn btn-default btn-lg">
+        <a [routerLink]="['../create']" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </a>
     </h1>
@@ -19,7 +19,7 @@
             <td>{{ student.name }}</td>
             <td>{{ student.phone }}</td>
             <td>{{ student.email }}</td>
-            <td><a [routerLink]="['/student-details', student.id]">Show Details</a></td>
+            <td><a [routerLink]="['../details/', student.id]">Show Details</a></td>
         </tr>
         </tbody>
     </table>

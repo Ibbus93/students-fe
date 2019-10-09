@@ -20,7 +20,7 @@ export class StudentService {
   };
 
   insertStudent = (student: Student) => {
-    return this.http.post<Student>(this.baseUrl, {name: student.name, phone: student.phone, email: student.email}); // {...student}
+    return this.http.post<Student>(this.baseUrl, {name: student.name, phone: student.phone, email: student.email}); // {...list}
   };
 
   editStudent = (student: Student) => {
