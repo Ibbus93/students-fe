@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 
@@ -9,6 +9,8 @@ import {BeachesListComponent} from './list/beaches-list.component';
 import {BeachEditComponent} from './edit/beach-edit.component';
 import {BeachDetailComponent} from './detail/beach-detail.component';
 import {BeachCreateComponent} from './create/beach-create.component';
+import {BeachService} from '../../shared/services/beaches.service';
+import {CoreModule} from '../../core/core.module';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,16 @@ import {BeachCreateComponent} from './create/beach-create.component';
     BeachCreateComponent
   ],
   imports: [
+    CoreModule,
     FormsModule,
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FeatureBeachesRoutingModule
   ],
-  providers: [],
+  providers: [
+    BeachService
+  ],
 })
 export class FeatureBeachesModule {
 }

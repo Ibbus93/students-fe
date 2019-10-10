@@ -1,3 +1,90 @@
-<p>
-  beach-create works!
-</p>
+<div class="container">
+  <h2 class="my-4">Aggiungi una nuova spiaggia</h2>
+
+  <div class="row">
+    <div class="col-md-8">
+      <form class="card p-3" [formGroup]="beachForm" (ngSubmit)="insertBeach()">
+
+        <!-- Name and province -->
+        <div class="form-row">
+          <app-form-input class="form-group col-md-9" type="text" [group]="beachForm" label="Nome" attributeName="name"
+                          placeholder="Inserisci un nome" maxLength="30">
+          </app-form-input>
+          <app-form-input class="form-group col-md-3" type="text" [group]="beachForm" label="Provincia"
+                          attributeName="province" placeholder="Provincia" maxLength="2">
+          </app-form-input>
+        </div>
+
+        <!-- Latitude, longitude and orientation -->
+        <div class="form-row">
+          <app-form-input class="form-group col-md-4" type="number" [group]="beachForm" label="Latitudine"
+                          attributeName="latitude"
+                          placeholder="Latitudine" [minValue]="-90" [maxValue]="90">
+          </app-form-input>
+          <app-form-input class="form-group col-md-4" type="number" [group]="beachForm" label="Latitudine"
+                          attributeName="latitude"
+                          placeholder="Latitudine" [minValue]="-90" [maxValue]="90">
+          </app-form-input>
+          <div class="form-group col-md-4">
+            <label for="orientation">Orientamento</label>
+            <select class="form-control" id="orientation" formControlName="orientation">
+              <option value="north" [selected]="true">Nord</option>
+              <option value="south">Sud</option>
+              <option value="ovest">Ovest</option>
+              <option value="east">Est</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="photo">Foto</label>
+            <input type="text" class="form-control" id="photo" formControlName="photo"
+                   placeholder="Indirizzo immagine spiaggia">
+          </div>
+
+          <div class="form-group col-md-6" style="margin-top: 2rem;">
+            <button class="btn btn-outline-info" (click)="previewPhoto(beachForm.value.photo)">Anteprima</button>
+            <button class="btn btn-outline-danger ml-2" (click)="previewPhoto(null)">Nascondi</button>
+          </div>
+
+          <!-- Photo preview -->
+          <div class="form-group">
+            <div class="col-md-6">
+              <img *ngIf="pathPreview" [src]="pathPreview" class="img-fluid" alt="Anteprima spiaggia">
+            </div>
+          </div>
+        </div>
+
+        <h4 class="my-4">Altri servizi</h4>
+
+        <div class="form-row">
+          <div class="form-check col-md-4 ml-4">
+            <input class="form-check-input" type="checkbox" formControlName="park" id="park">
+            <label class="form-check-label" for="park">Parcheggio</label>
+          </div>
+          <div class="form-check col-md-4 ">
+            <input class="form-check-input" type="checkbox" formControlName="food_service" id="food_service">
+            <label class="form-check-label" for="food_service">Ristorazione</label>
+          </div>
+          <div class="form-check col-md-3 ">
+            <input class="form-check-input" type="checkbox" formControlName="lifeguard" id="lifeguard">
+            <label class="form-check-label" for="lifeguard">Salvataggio</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-check col-md-4 ml-4">
+            <input class="form-check-input" type="checkbox" formControlName="dogs_allowed" id="dogs_allowed">
+            <label class="form-check-label" for="dogs_allowed">Cani ammessi</label>
+          </div>
+          <div class="form-check col-md-6 ">
+            <input class="form-check-input" type="checkbox" formControlName="summer_crowding" id="summer_crowding">
+            <label class="form-check-label" for="summer_crowding">Affollamento estivo</label>
+          </div>
+        </div>
+
+        <div class="form-row mt-4">
+          <button type="submit" class="btn btn-success ml-auto mr-1">Inserisci</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
