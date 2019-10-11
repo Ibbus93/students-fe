@@ -11,7 +11,7 @@ export class BeachService {
   constructor(private http: HttpClient) {
   }
 
-  getBeachs = () => {
+  getBeaches = () => {
     return this.http.get<Array<Beach>>(this.baseUrl);
   };
 

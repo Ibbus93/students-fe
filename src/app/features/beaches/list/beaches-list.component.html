@@ -1,3 +1,30 @@
-<p>
-  beaches-list works!
-</p>
+<div class="container">
+  <h1 class="my-3">
+    Beaches list
+    <a [routerLink]="['../create']">
+      <i class="fas fa-plus-square" aria-hidden="true"></i>
+    </a>
+  </h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Provincia</th>
+      <th>Latitudine</th>
+      <th>Longitudine</th>
+      <th>Orientamento</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let beach of beaches">
+      <td>{{ beach.name }}</td>
+      <td>{{ beach.province }}</td>
+      <td>{{ beach.latitude }}</td>
+      <td>{{ beach.longitude }}</td>
+      <td>{{ beach.orientation }}</td>
+      <td><a [routerLink]="['../details/', beach.id]">Show Details</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

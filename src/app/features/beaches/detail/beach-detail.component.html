@@ -1,3 +1,18 @@
-<p>
-  beach-detail works!
-</p>
+<div *ngIf="beach" class="container">
+  <h1>
+    <a [routerLink]="['../../']">
+      <i class="fas fa-arrow-left" aria-hidden="true"></i>
+    </a>
+    {{ beach.name }}
+  </h1>
+  <dl class="list">
+    <dt>Provincia</dt>
+    <dd>{{ beach.province }}</dd>
+    <dt>Orientamento</dt>
+    <dd>{{ beach.orientation }}</dd>
+    <dt>Posizione</dt>
+    <dd>{{beach.latitude}}, {{beach.longitude}}</dd>
+  </dl>
+  <a [routerLink]="['../../edit', beach.id]" class="btn btn-success">EDIT</a>
+  <button class="btn btn-danger" type="submit" (click)="deleteStudent(beach.id)">DELETE</button>
+</div>

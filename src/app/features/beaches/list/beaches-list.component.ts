@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BeachService} from '../../../shared/services/beaches.service';
+import {Beach} from '../../../shared/models/Beach';
 
 @Component({
   selector: 'app-beaches-list',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./beaches-list.component.css']
 })
 export class BeachesListComponent implements OnInit {
+  beaches: Array<Beach> = [];
 
-  constructor() { }
+  constructor(
+    private beachService: BeachService
+  ) {
+  }
 
   ngOnInit() {
+    this.beachService.getBeaches()
+      .subscribe(resBeaches => {
+        this.beaches = resBeaches;
+      }, err =>
+        console.error(err));
   }
 
 }
