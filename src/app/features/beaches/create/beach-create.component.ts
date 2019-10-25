@@ -24,6 +24,7 @@ export class BeachCreateComponent implements OnInit {
   ) {
     this.beachForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.minLength(5), Validators.maxLength(30), Validators.required])],
+      city: ['', Validators.compose([Validators.required, Validators.maxLength(40)])],
       province: ['', Validators.compose([Validators.required, Validators.maxLength(2)])],
       latitude: [null, Validators.required],
       longitude: [null, Validators.required],
@@ -49,7 +50,7 @@ export class BeachCreateComponent implements OnInit {
 
     this.beachService.insertBeach(beach)
       .subscribe(result => {
-        this.router.navigate(['../list']);
+        this.router.navigate(['beaches/list']);
       }, error => {
         console.error(error);
       });

@@ -1,26 +1,26 @@
 <div class="container">
-    <h1>
-        Students list
-        <a [routerLink]="['../create']">
-            <span class="fas fa-2x fa-plus-square" aria-hidden="true"></span>
-        </a>
-    </h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let student of students">
-            <td>{{ student.name }}</td>
-            <td>{{ student.phone }}</td>
-            <td>{{ student.email }}</td>
-            <td><a [routerLink]="['../details/', student.id]">Show Details</a></td>
-        </tr>
-        </tbody>
-    </table>
+  <h1 class="my-3">
+    Students list
+    <a [routerLink]="['../create']">
+      <span class="fas fa-plus-square" aria-hidden="true"></span>
+    </a>
+  </h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{ student.name }}</td>
+      <td>{{ student.phone }}</td>
+      <td>{{ student.email }}</td>
+      <td><a [routerLink]="['../details/', student.id]">Show Details</a></td>
+    </tr>
+    </tbody>
+  </table>
 </div>

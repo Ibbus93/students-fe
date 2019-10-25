@@ -5,7 +5,29 @@
       <i class="fas fa-plus-square" aria-hidden="true"></i>
     </a>
   </h1>
-  <table class="table">
+
+  <div class="order-list my-3 text-right">
+    <h4 class="d-inline-block mr-2">Ordina per: </h4>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+      <label class="custom-control-label" for="customRadioInline1">Parcheggio</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+      <label class="custom-control-label" for="customRadioInline2">Affollamento</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
+      <label class="custom-control-label" for="customRadioInline3">Traffico</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="customRadioInline4" name="customRadioInline1" class="custom-control-input">
+      <label class="custom-control-label" for="customRadioInline4">Meteo</label>
+    </div>
+
+  </div>
+
+  <table *ngIf="loaded && beaches.length > 0" class="table">
     <thead>
     <tr>
       <th>Nome</th>
@@ -13,18 +35,24 @@
       <th>Latitudine</th>
       <th>Longitudine</th>
       <th>Orientamento</th>
-      <th></th>
+      <th>Traffico</th>
+      <th>Meteo</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let beach of beaches">
+    <tr class="table-element cursor-pointer" *ngFor="let beach of beaches" (click)="goToDetails(beach.id)">
       <td>{{ beach.name }}</td>
       <td>{{ beach.province }}</td>
       <td>{{ beach.latitude }}</td>
       <td>{{ beach.longitude }}</td>
       <td>{{ beach.orientation }}</td>
-      <td><a [routerLink]="['../details/', beach.id]">Show Details</a></td>
+      <td><div class="rounded-circle {{getTrafficClass(beach.traffic)}}"></div></td>
+      <td class="weather-icon"><img [src]="beach.weatherIcon" alt="meteo"></td>
     </tr>
     </tbody>
   </table>
+
+  <h3 *ngIf="loaded && beaches.length === 0">Non ci sono ancora spiagge! Provvedi ad aggiungerne.</h3>
+
+  <h3 *ngIf="!loaded">Loading...</h3>
 </div>

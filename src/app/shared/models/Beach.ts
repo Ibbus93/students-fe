@@ -1,6 +1,7 @@
 export interface Beach {
   id?: number;
   name?: string;
+  city?: string;
   province?: string;
   latitude?: number;
   longitude?: number;
@@ -11,6 +12,8 @@ export interface Beach {
   dogs_allowed?: boolean;
   summer_crowding?: boolean;
   photo?: string;
+  weatherIcon?: string;
+  traffic?: number;
 }
 
 export const Orientation = {

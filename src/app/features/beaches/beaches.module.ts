@@ -11,6 +11,8 @@ import {BeachDetailComponent} from './detail/beach-detail.component';
 import {BeachCreateComponent} from './create/beach-create.component';
 import {BeachService} from '../../shared/services/beaches.service';
 import {CoreModule} from '../../core/core.module';
+import {WeatherService} from '../../shared/services/weather.service';
+import {TrafficService} from '../../shared/services/traffic.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {CoreModule} from '../../core/core.module';
     FeatureBeachesRoutingModule
   ],
   providers: [
-    BeachService
+    BeachService,
+    WeatherService,
+    TrafficService
   ],
 })
 export class FeatureBeachesModule {

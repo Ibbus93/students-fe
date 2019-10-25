@@ -13,9 +13,10 @@
         <!-- Name and province -->
         <div class="form-row">
           <!-- Example of form element written by hand-->
-          <div class="form-group col-md-7">
+          <div class="form-group col-md-4">
             <label for="name">Nome</label>
-            <input class="form-control" type="text" id="name" formControlName="name" placeholder="Inserisci un nome" maxlength="30"/>
+            <input class="form-control" type="text" id="name" formControlName="name" placeholder="Inserisci un nome"
+                   maxlength="30"/>
             <span *ngIf="submitted && beachForm.controls.name && beachForm.controls.name.errors" class="text-danger">
               Il nome è obbligatorio, max 30 caratteri.
             </span>
@@ -23,8 +24,15 @@
 
           <!-- Custom element who takes some parameters and renders the component required -->
           <app-form-input
-            class="form-group col-md-5" type="text" [group]="beachForm" label="Provincia" attributeName="province"
-            placeholder="Provincia" [maxLength]="2" [submitted]="submitted" invalidFeedback="Campo richiesto, max 2 caratteri.">
+            class="form-group col-md-4" type="text" [group]="beachForm" label="Città" attributeName="city"
+            placeholder="Città" [maxLength]="40" [submitted]="submitted"
+            invalidFeedback="Campo richiesto, max 2 caratteri.">
+          </app-form-input>
+
+          <app-form-input
+            class="form-group col-md-4" type="text" [group]="beachForm" label="Provincia" attributeName="province"
+            placeholder="Provincia" [maxLength]="2" [submitted]="submitted"
+            invalidFeedback="Campo richiesto, max 2 caratteri.">
           </app-form-input>
         </div>
 
@@ -52,8 +60,8 @@
           </app-form-input>
 
           <div class="form-group col-md-5 text-right" style="margin-top: 2rem;">
-            <button class="btn btn-outline-info" (click)="previewPhoto(beachForm.value.photo)">Anteprima</button>
-            <button class="btn btn-outline-danger ml-2" (click)="previewPhoto(null)">Nascondi</button>
+            <div class="btn btn-outline-info cursor-pointer" (click)="previewPhoto(beachForm.value.photo)">Anteprima</div>
+            <div class="btn btn-outline-danger cursor-pointer ml-2" (click)="previewPhoto(null)">Nascondi</div>
           </div>
 
           <!-- Photo preview -->

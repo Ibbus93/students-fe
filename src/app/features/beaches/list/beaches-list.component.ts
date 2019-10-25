@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {BeachService} from '../../../shared/services/beaches.service';
 import {Beach} from '../../../shared/models/Beach';
+import {WeatherService} from '../../../shared/services/weather.service';
+import {CurrentWeather} from '../../../shared/models/Meteo';
+import {TrafficService} from '../../../shared/services/traffic.service';
+import {Traffic} from '../../../shared/models/Traffic';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-beaches-list',
@@ -9,18 +14,60 @@ import {Beach} from '../../../shared/models/Beach';
 })
 export class BeachesListComponent implements OnInit {
   beaches: Array<Beach> = [];
+  loaded = false;
 
   constructor(
-    private beachService: BeachService
+    private beachService: BeachService,
+    private weatherService: WeatherService,
+    private trafficService: TrafficService,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
-    this.beachService.getBeaches()
-      .subscribe(resBeaches => {
-        this.beaches = resBeaches;
-      }, err =>
-        console.error(err));
+    this.loadComponent();
   }
 
+  loadComponent = () => {
+    this.beachService.getBeaches()
+      .subscribe((resBeaches: Array<Beach>) => {
+          for (const beach of resBeaches) {
+            this.getWeather(beach);
+            this.getTraffic(beach);
+          }
+
+          this.beaches = resBeaches;
+          this.loaded = true;
+        }, err => {
+          console.error(err);
+          this.loaded = true;
+        }
+      );
+  };
+
+  getWeather = (beach: Beach) => {
+    this.weatherService.getCurrent(beach.city, beach.latitude, beach.longitude)
+      .subscribe((weather: CurrentWeather) => {
+        beach.weatherIcon = this.getWeatherIconPath(weather.data[0].weather.icon);
+      }, err => {
+        console.error(err);
+      });
+  };
+
+  getTraffic = (beach: Beach) => {
+    this.trafficService.getTraffic(beach.city)
+      .subscribe((traffic: Traffic) => {
+        if (traffic) {
+          beach.traffic = traffic.value;
+        }
+      }, err => {
+        console.error(err);
+      });
+  };
+
+  getWeatherIconPath = (icon: string): string => `https://www.weatherbit.io/static/img/icons/${icon}.png`;
+
+  getTrafficClass = (value: number) => value > 80 ? 'bg-danger' : (value > 50 && value < 80 ? 'bg-warning' : 'bg-success');
+
+  goToDetails = (id: number) => this.router.navigate([`beaches/details/${id}`]);
 }
