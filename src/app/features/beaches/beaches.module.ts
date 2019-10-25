@@ -13,6 +13,7 @@ import {BeachService} from '../../shared/services/beaches.service';
 import {CoreModule} from '../../core/core.module';
 import {WeatherService} from '../../shared/services/weather.service';
 import {TrafficService} from '../../shared/services/traffic.service';
+import {SortService} from '../../shared/services/sort.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {TrafficService} from '../../shared/services/traffic.service';
     FeatureBeachesRoutingModule
   ],
   providers: [
+    SortService,
     BeachService,
     WeatherService,
     TrafficService

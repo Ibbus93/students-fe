@@ -6,6 +6,7 @@ import {CurrentWeather} from '../../../shared/models/Meteo';
 import {TrafficService} from '../../../shared/services/traffic.service';
 import {Traffic} from '../../../shared/models/Traffic';
 import {Router} from '@angular/router';
+import {SortService} from '../../../shared/services/sort.service';
 
 @Component({
   selector: 'app-beaches-list',
@@ -14,9 +15,11 @@ import {Router} from '@angular/router';
 })
 export class BeachesListComponent implements OnInit {
   beaches: Array<Beach> = [];
+  radioValue = 'park';
   loaded = false;
 
   constructor(
+    private sortService: SortService,
     private beachService: BeachService,
     private weatherService: WeatherService,
     private trafficService: TrafficService,
@@ -34,6 +37,7 @@ export class BeachesListComponent implements OnInit {
           for (const beach of resBeaches) {
             this.getWeather(beach);
             this.getTraffic(beach);
+            this.sortBeaches();
           }
 
           this.beaches = resBeaches;
@@ -49,6 +53,7 @@ export class BeachesListComponent implements OnInit {
     this.weatherService.getCurrent(beach.city, beach.latitude, beach.longitude)
       .subscribe((weather: CurrentWeather) => {
         beach.weatherIcon = this.getWeatherIconPath(weather.data[0].weather.icon);
+        beach.weather = weather;
       }, err => {
         console.error(err);
       });
@@ -64,6 +69,17 @@ export class BeachesListComponent implements OnInit {
         console.error(err);
       });
   };
+
+  radioChange = () => {
+    console.log(this.radioValue);
+    this.sortBeaches();
+  };
+
+  sortBeaches = () => {
+    this.beaches = this.sortService.getSortedData(this.beaches, this.radioValue);
+  };
+
+
 
   getWeatherIconPath = (icon: string): string => `https://www.weatherbit.io/static/img/icons/${icon}.png`;
 

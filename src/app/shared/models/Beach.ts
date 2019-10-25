@@ -1,3 +1,5 @@
+import {CurrentWeather} from './Meteo';
+
 export interface Beach {
   id?: number;
   name?: string;
@@ -6,13 +8,14 @@ export interface Beach {
   latitude?: number;
   longitude?: number;
   orientation?: string;
-  park?: string;
+  park?: boolean;
   food_service?: boolean;
   lifeguard?: boolean;
   dogs_allowed?: boolean;
   summer_crowding?: boolean;
   photo?: string;
   weatherIcon?: string;
+  weather: CurrentWeather;
   traffic?: number;
 }
 
