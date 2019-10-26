@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Beach, Orientation} from '../../../shared/models/Beach';
 import {BeachService} from '../../../shared/services/beaches.service';
@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   templateUrl: './beach-create.component.html',
   styleUrls: ['./beach-create.component.css']
 })
-export class BeachCreateComponent implements OnInit {
+export class BeachCreateComponent {
 
   orient = Orientation;
   beachForm: FormGroup;
@@ -62,8 +62,4 @@ export class BeachCreateComponent implements OnInit {
   previewPhoto = (path) => {
     this.pathPreview = path;
   };
-
-  ngOnInit() {
-  }
-
 }

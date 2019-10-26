@@ -10,11 +10,11 @@ export class SortService {
 
   getSortedData = (data: Array<Beach>, key: string = 'park'): Array<Beach> => {
     let desc: boolean;
+
     switch (key) {
       case 'park':
       case 'summer_crowding':
         desc = key !== 'park';
-        console.warn(desc);
         data = data.sort((a: Beach, b: Beach) => this.booleanCriteria(a[key], b[key], desc));
         break;
       case 'traffic':

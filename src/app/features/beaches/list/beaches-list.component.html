@@ -6,7 +6,7 @@
     </a>
   </h1>
 
-  <div class="order-list my-3 text-right">
+  <div *ngIf="loaded" class="order-list my-3 text-right">
     <h4 class="d-inline-block mr-2">Ordina per: </h4>
     <form (change)="radioChange()">
       <div class="custom-control custom-radio custom-control-inline">
