@@ -21,7 +21,7 @@ export class FormInputSelectComponent implements OnInit {
 
   @HostBinding('class') @Input('class') classList = '';
 
-  private keys;
+  keys;
 
   ngOnInit() {
     this.keys = Object.keys(this.values);
