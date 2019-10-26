@@ -9,28 +9,33 @@ export class SortService {
   }
 
   getSortedData = (data: Array<Beach>, key: string = 'park'): Array<Beach> => {
+    let desc: boolean;
     switch (key) {
       case 'park':
       case 'summer_crowding':
-        data = data.sort((a: Beach, b: Beach) => this.booleanCriteria(a[key], b[key]));
+        desc = key !== 'park';
+        console.warn(desc);
+        data = data.sort((a: Beach, b: Beach) => this.booleanCriteria(a[key], b[key], desc));
         break;
       case 'traffic':
-        data = data.sort((a: Beach, b: Beach) => this.integerCriteria(b.traffic, a.traffic));
+        data = data.sort((a: Beach, b: Beach) => this.integerCriteria(a.traffic, b.traffic));
         break;
       case 'weather':
-        data = data.sort((a: Beach, b: Beach) => this.integerCriteria(a.weather.data[0].temp, b.weather.data[0].temp));
+        data = data.sort((a: Beach, b: Beach) =>
+          this.integerCriteria(a.weather.data[0].clouds, b.weather.data[0].clouds)
+        );
         break;
     }
 
     return data;
   };
 
-  booleanCriteria = (a: boolean, b: boolean) => {
+  booleanCriteria = (a: boolean, b: boolean, desc: boolean = true) => {
     const first = a ? 1 : 0;
     const second = b ? 1 : 0;
 
-    return first - second;
+    return desc ? first - second : second - first;
   };
 
-  integerCriteria = (a: number, b: number) => a - b;
+  integerCriteria = (a: number, b: number, desc: boolean = true) => desc ? a - b : b - a;
 }

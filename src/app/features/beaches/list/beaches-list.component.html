@@ -43,14 +43,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="table-element cursor-pointer" *ngFor="let beach of beaches" (click)="goToDetails(beach.id)">
+    <tr class="table-element cursor-pointer" *ngFor="let beach of beaches.slice(0, 10)" (click)="goToDetails(beach.id)">
       <td>{{ beach.name }}</td>
       <td>{{ beach.province }}</td>
       <td>{{ beach.latitude }}</td>
       <td>{{ beach.longitude }}</td>
       <td>{{ beach.orientation }}</td>
       <td>
-        <div class="rounded-circle {{getTrafficClass(beach.traffic)}}"></div>
+        <div class="rounded-circle text-center {{getTrafficClass(beach.traffic)}}">{{beach.traffic}}</div>
       </td>
       <td class="weather-icon"><img [src]="beach.weatherIcon" alt="meteo"></td>
     </tr>
