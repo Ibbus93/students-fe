@@ -71,7 +71,6 @@ export class BeachesListComponent implements OnInit {
   };
 
   radioChange = () => {
-    console.log(this.radioValue);
     this.sortBeaches();
   };
 
@@ -79,11 +78,9 @@ export class BeachesListComponent implements OnInit {
     this.beaches = this.sortService.getSortedData(this.beaches, this.radioValue);
   };
 
-
-
   getWeatherIconPath = (icon: string): string => `https://www.weatherbit.io/static/img/icons/${icon}.png`;
 
-  getTrafficClass = (value: number) => value > 80 ? 'bg-danger' : (value > 50 && value < 80 ? 'bg-warning' : 'bg-success');
+  getTrafficClass = (value: number) => value >= 80 ? 'bg-danger' : (value > 50 && value < 80 ? 'bg-warning' : 'bg-success');
 
   goToDetails = (id: number) => this.router.navigate([`beaches/details/${id}`]);
 }

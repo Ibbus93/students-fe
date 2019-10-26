@@ -15,7 +15,7 @@ export class SortService {
         data = data.sort((a: Beach, b: Beach) => this.booleanCriteria(a[key], b[key]));
         break;
       case 'traffic':
-        data = data.sort((a: Beach, b: Beach) => this.integerCriteria(a.traffic, b.traffic));
+        data = data.sort((a: Beach, b: Beach) => this.integerCriteria(b.traffic, a.traffic));
         break;
       case 'weather':
         data = data.sort((a: Beach, b: Beach) => this.integerCriteria(a.weather.data[0].temp, b.weather.data[0].temp));
