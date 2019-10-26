@@ -18,7 +18,7 @@
           <div class="col-md-6 details">
             <div class="mb-0"><b>Meteo</b><img class="weather-icon" [src]="beach.weatherIcon"/></div>
             <div class="mb-3"><b class="mr-2">Traffico</b><div
-              class="rounded-circle d-inline-block {{getTrafficClass(beach.traffic)}}"></div></div>
+              class="rounded-circle d-inline-block {{getTrafficClass(beach.traffic)}}"><p>{{beach.traffic}}</p></div></div>
             <div class="my-3"><b class="mr-2">Orientamento</b>{{ beach.orientation }}</div>
             <div class="my-3"><b class="mr-2">Posizione</b>{{beach.latitude}}, {{beach.longitude}}</div>
           </div>

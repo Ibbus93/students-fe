@@ -11,6 +11,11 @@ div .rounded-circle {
   height: 30px;
 }
 
+div .rounded-circle p {
+  padding-top: 2px;
+  color: white;
+}
+
 .table-element:hover {
   background-color: lightblue;
 }

@@ -50,7 +50,7 @@
       <td>{{ beach.longitude }}</td>
       <td>{{ beach.orientation }}</td>
       <td>
-        <div class="rounded-circle text-center {{getTrafficClass(beach.traffic)}}">{{beach.traffic}}</div>
+        <div class="rounded-circle text-center {{getTrafficClass(beach.traffic)}}"><p>{{beach.traffic}}</p></div>
       </td>
       <td class="weather-icon"><img [src]="beach.weatherIcon" alt="meteo"></td>
     </tr>
