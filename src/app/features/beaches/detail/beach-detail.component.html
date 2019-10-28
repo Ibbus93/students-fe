@@ -22,6 +22,14 @@
             <div class="my-3"><b class="mr-2">Orientamento</b>{{ beach.orientation }}</div>
             <div class="my-3"><b class="mr-2">Posizione</b>{{beach.latitude}}, {{beach.longitude}}</div>
           </div>
+          <div class="col-md-12 my-3">
+            <h3>Altre info e servizi:</h3>
+            <span class="mr-2"><i class="mr-1 fas {{getInfoClass(beach.park)}}"></i>Parcheggio</span>
+            <span class="mr-2"><i class="mr-1 fas {{getInfoClass(beach.food_service)}}"></i>Ristorazione</span>
+            <span class="mr-2"><i class="mr-1 fas {{getInfoClass(beach.lifeguard)}}"></i>Bagnino</span>
+            <span class="mr-2"><i class="mr-1 fas {{getInfoClass(beach.dogs_allowed)}}"></i>Cani ammessi</span>
+            <span class="mr-2"><i class="mr-1 fas {{getInfoClass(beach.summer_crowding)}}"></i>Affollamento estivo</span>
+          </div>
         </div>
       </div>
       <div class="card-footer text-right">

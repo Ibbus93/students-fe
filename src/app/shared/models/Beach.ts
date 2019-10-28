@@ -20,8 +20,8 @@ export interface Beach {
 }
 
 export const Orientation = {
-  North: 'Nord',
-  South: 'Sud',
-  West: 'Ovest',
-  East: 'Est',
+  Nord: 'Nord',
+  Sud: 'Sud',
+  Ovest: 'Ovest',
+  Est: 'Est',
 };

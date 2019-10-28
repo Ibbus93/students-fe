@@ -11,4 +11,9 @@ div .rounded-circle {
 div .rounded-circle p {
   margin-left: 3px;
   color: white;
+  font-weight: bold;
+}
+
+img {
+  border-radius: 5px;
 }

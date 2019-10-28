@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="my-3">
-    Beaches list
+    Lista spiagge
     <a [routerLink]="['../create']">
       <i class="fas fa-plus-square" aria-hidden="true"></i>
     </a>
@@ -32,25 +32,27 @@
 
   <table *ngIf="loaded && beaches.length > 0" class="table">
     <thead>
-    <tr>
+    <tr class="text-center">
       <th>Nome</th>
-      <th>Provincia</th>
-      <th>Latitudine</th>
-      <th>Longitudine</th>
+      <th>Città</th>
+      <th>Posizione</th>
       <th>Orientamento</th>
+      <th>Parcheggio</th>
+      <th>Affollamento</th>
       <th>Traffico</th>
       <th>Meteo</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="table-element cursor-pointer" *ngFor="let beach of beaches.slice(0, 10)" (click)="goToDetails(beach.id)">
+    <tr class="table-element cursor-pointer text-center" *ngFor="let beach of beaches.slice(0, 10)" (click)="goToDetails(beach.id)">
       <td>{{ beach.name }}</td>
-      <td>{{ beach.province }}</td>
-      <td>{{ beach.latitude }}</td>
-      <td>{{ beach.longitude }}</td>
-      <td>{{ beach.orientation }}</td>
+      <td>{{ beach.city + ' (' + beach.province + ')' }}</td>
+      <td>{{ beach.latitude + ', ' + beach.longitude }}</td>
+      <td><i class="fas fa-2x {{ getOrientationArrow(beach.orientation) }}"></i></td>
+      <td class="text-center"><i class="fas fa-2x {{getInfoClass(beach.park)}}"></i></td>
+      <td><i class="fas fa-2x {{getInfoClass(beach.summer_crowding)}}"></i></td>
       <td>
-        <div class="rounded-circle text-center {{getTrafficClass(beach.traffic)}}"><p>{{beach.traffic}}</p></div>
+        <div class="rounded-circle m-auto text-center {{getTrafficClass(beach.traffic)}}"><p>{{beach.traffic}}</p></div>
       </td>
       <td class="weather-icon"><img [src]="beach.weatherIcon" alt="meteo"></td>
     </tr>

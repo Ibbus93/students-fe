@@ -28,7 +28,7 @@ export class BeachCreateComponent {
       province: ['', Validators.compose([Validators.required, Validators.maxLength(2)])],
       latitude: [null, Validators.required],
       longitude: [null, Validators.required],
-      orientation: ['North', Validators.required],
+      orientation: ['Nord', Validators.required],
       park: [false],
       food_service: [false],
       lifeguard: [false],
