@@ -9,7 +9,7 @@ div .rounded-circle {
 }
 
 div .rounded-circle p {
-  margin-left: 3px;
+  text-align: center;
   color: white;
   font-weight: bold;
 }

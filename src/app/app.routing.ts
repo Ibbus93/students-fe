@@ -9,7 +9,8 @@ import {HomeComponent} from './home/home.component';
     RouterModule.forRoot([
       {
         path: '',
-        component: HomeComponent
+        redirectTo: 'beaches',
+        pathMatch: 'full'
       },
       {
         path: 'students',
