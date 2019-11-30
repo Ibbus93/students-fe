@@ -11,10 +11,13 @@ import {SortService} from '../../../shared/services/sort.service';
 @Component({
   selector: 'app-beaches-list',
   templateUrl: './beaches-list.component.html',
-  styleUrls: ['./beaches-list.component.css']
+  styleUrls: ['./beaches-list.component.scss']
 })
 export class BeachesListComponent implements OnInit {
   beaches: Array<Beach> = [];
+
+  tags: Array<String> = ['Relax', 'Avventura', 'Pedalò', 'Famiglia', 'Kayak', 'Ristorante', 'Cani ammessi'];
+
   radioValue = 'park';
   loaded = false;
 
@@ -28,7 +31,7 @@ export class BeachesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadComponent();
+    // this.loadComponent();
   }
 
   loadComponent = () => {

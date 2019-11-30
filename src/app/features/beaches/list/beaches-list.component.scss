@@ -1,0 +1,148 @@
+div.d-flex {
+  background-color: #f2f2f2;
+  height: 100vh;
+  padding: 0;
+
+  div.menu {
+    border-right: 3px solid #ddd;
+    padding-left: 0;
+    padding-right: 0;
+
+    .search-bar {
+      background-color: #fff;
+      color: #363636;
+      width: 100%;
+      padding: 10px;
+
+      input {
+        width: 90%;
+        border: 0;
+        height: 50px;
+        font-size: 20px;
+        padding-left: 1rem;
+
+        & ::placeholder, ::-webkit-input-placeholder, ::-moz-placeholder {
+          color: black !important;
+        }
+
+        i.fa {
+          width: 10%;
+        }
+      }
+    }
+  }
+
+  div.btn-group {
+    button {
+      border: 0;
+      border-bottom: 3px solid #ddd;
+    }
+
+    button.active {
+      border-bottom: 3px solid black;
+      font-weight: bold;
+      background-color: inherit;
+      color: inherit;
+    }
+
+    button:hover {
+      border-radius: 0;
+    }
+  }
+
+  div.tag-list {
+    .badge {
+      background-color: #fff !important;
+      font-size: 16px;
+      font-weight: normal;
+    }
+  }
+
+  div.filters {
+    div.accordion {
+      button.btn-link {
+        color: #363636;
+        font-size: 25px;
+      }
+
+      button:after {
+        content: "\2B9E"; /* fa-chevron-down */
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+
+      button[aria-expanded="true"]:after {
+        content: "\2B9F"; /* fa-chevron-up */
+      }
+
+      div.card-header {
+        background: white;
+        font-weight: bolder;
+        padding: 0 1rem;
+      }
+
+      div.card-body {
+        background-color: #f2f2f2;
+
+        .form-check {
+          margin-left: 1rem;
+
+          input[type='checkbox'] {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 5px;
+            border: 2px solid #555;
+            margin: 6px 0 0;
+          }
+          input[type='checkbox']:checked {
+            background-color: lightblue;
+          }
+
+          label {
+            margin-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  div.meteo {
+    font-size: 20px;
+
+    button.btn {
+      background-color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 1px 2px 5px #979191;
+      color: #363636;
+
+
+      &:hover {
+        background-color: #363636;
+        color: white;
+      }
+    }
+  }
+
+  div.beach-list {
+    img {
+      border-radius: 1rem;
+    }
+
+    .img-caption {
+      position: absolute;
+      padding: 10px;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      height: 70px;
+      background-color: rgba(236, 234, 223, 0.5);
+      width: -moz-available;
+      right: 0.5rem;
+      border-radius: 0 0 1rem 1rem;
+    }
+
+  }
+}
