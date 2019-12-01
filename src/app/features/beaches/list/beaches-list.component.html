@@ -1,4 +1,4 @@
-<div class="d-flex flex-row">
+<div class="d-flex flex-row h-100">
   <div class="col-3 menu">
     <div class="search-bar">
       <input class="text-left" type="text" placeholder="Cerca spiagga o location">
@@ -18,7 +18,7 @@
         <span class="pl-3 text-uppercase text-secondary mb-2 font-weight-bolder">Filtra spiagge</span>
       </div>
 
-      <div class="accordion" id="accordionExample">
+      <div class="accordion" id="accordionExample" (change)="filterBeaches()">
         <div class="card">
           <div class="card-header" id="headingOne">
             <h2 class="mb-0">
@@ -30,26 +30,26 @@
           </div>
 
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
-            <div class="card-body">
-              <form>
+            <form [formGroup]="orientationForm">
+              <div class="card-body">
                 <div class="form-check form-check-group">
-                  <input id="checkbox-occidentale" type="checkbox">
+                  <input id="checkbox-occidentale" formControlName="west" type="checkbox">
                   <label for="checkbox-occidentale">Occidentale</label>
                 </div>
                 <div class="form-check form-check-group">
-                  <input id="checkbox-meridionale" type="checkbox">
+                  <input id="checkbox-meridionale" formControlName="south" type="checkbox">
                   <label for="checkbox-meridionale">Meridionale</label>
                 </div>
                 <div class="form-check form-check-group">
-                  <input id="checkbox-orientale" type="checkbox">
+                  <input id="checkbox-orientale" formControlName="east" type="checkbox">
                   <label for="checkbox-orientale">Orientale</label>
                 </div>
                 <div class="form-check form-check-group">
-                  <input id="checkbox-settentrionale" type="checkbox">
+                  <input id="checkbox-settentrionale" formControlName="north" type="checkbox">
                   <label for="checkbox-settentrionale">Settentrionale</label>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
         <div class="card">
@@ -63,17 +63,17 @@
           </div>
           <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
             <div class="card-body">
-              <form>
+              <form [formGroup]="crowdForm">
                 <div class="form-check form-check-group">
-                  <input id="checkbox-affollata" type="checkbox">
+                  <input id="checkbox-affollata" formControlName="affollata" type="checkbox">
                   <label for="checkbox-affollata">Affollata</label>
                 </div>
                 <div class="form-check form-check-group">
-                  <input id="checkbox-frequentata" type="checkbox">
+                  <input id="checkbox-frequentata" formControlName="frequentata"type="checkbox">
                   <label for="checkbox-frequentata">Frequentata</label>
                 </div>
                 <div class="form-check form-check-group">
-                  <input id="checkbox-deserta" type="checkbox">
+                  <input id="checkbox-deserta" formControlName="deserta" type="checkbox">
                   <label for="checkbox-deserta">Deserta</label>
                 </div>
               </form>
@@ -91,21 +91,21 @@
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
             <div class="card-body">
-              <form>
+              <form [formGroup]="servicesForm">
                 <div class="form-check form-check-group">
-                  <input id="checkbox-park" type="checkbox">
+                  <input id="checkbox-park" formControlName="park" type="checkbox">
                   <label for="checkbox-park">Parcheggio</label>
                 </div>
                 <div class="form-check form-check-group">
-                  <input id="checkbox-ristorazione" type="checkbox">
+                  <input id="checkbox-ristorazione" formControlName="food_service" type="checkbox">
                   <label for="checkbox-ristorazione">Ristorazione</label>
                 </div>
                 <div class="form-check form-check-group">
-                  <input id="checkbox-bagnino" type="checkbox">
+                  <input id="checkbox-bagnino" formControlName="lifeguard" type="checkbox">
                   <label for="checkbox-bagnino">Bagnino</label>
                 </div>
                 <div class="form-check form-check-group">
-                  <input id="checkbox-cani" type="checkbox">
+                  <input id="checkbox-cani" formControlName="dogs_allowed" type="checkbox">
                   <label for="checkbox-cani">Cani ammessi</label>
                 </div>
               </form>
@@ -153,57 +153,12 @@
             </div>
           </ng-container>
         </div>
-        <div *ngIf="newBeaches.length === 0">
-          <h4>Loading ...</h4>
-        </div>
-        <!--<div class="row">
-          <div class="w-50 p-2 position-relative">
-            <img class="img-fluid" src="https://media-cdn.tripadvisor.com/media/photo-s/10/b7/d1/19/cala-banana.jpg"/>
-            <div class="img-caption">
-              <h4 class="d-block mb-0">Cala Banana</h4>
-              <b>Olbia (SS)</b>
-            </div>
-          </div>
-          <div class="w-50 p-2 position-relative">
-            <img class="img-fluid" src="https://media-cdn.tripadvisor.com/media/photo-s/10/b7/d1/19/cala-banana.jpg"/>
-            <div class="img-caption">
-              <h4 class="d-block mb-0">Cala Banana</h4>
-              <b>Olbia (SS)</b>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="w-50 p-2 position-relative">
-            <img class="img-fluid" src="https://media-cdn.tripadvisor.com/media/photo-s/10/b7/d1/19/cala-banana.jpg"/>
-            <div class="img-caption">
-              <h4 class="d-block mb-0">Cala Banana</h4>
-              <b>Olbia (SS)</b>
-            </div>
-          </div>
-          <div class="w-50 p-2 position-relative">
-            <img class="img-fluid" src="https://media-cdn.tripadvisor.com/media/photo-s/10/b7/d1/19/cala-banana.jpg"/>
-            <div class="img-caption">
-              <h4 class="d-block mb-0">Cala Banana</h4>
-              <b>Olbia (SS)</b>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="w-50 p-2 position-relative">
-            <img class="img-fluid" src="https://media-cdn.tripadvisor.com/media/photo-s/10/b7/d1/19/cala-banana.jpg"/>
-            <div class="img-caption">
-              <h4 class="d-block mb-0">Cala Banana</h4>
-              <b>Olbia (SS)</b>
-            </div>
-          </div>
-          <div class="w-50 p-2 position-relative">
-            <img class="img-fluid" src="https://media-cdn.tripadvisor.com/media/photo-s/10/b7/d1/19/cala-banana.jpg"/>
-            <div class="img-caption">
-              <h4 class="d-block mb-0">Cala Banana</h4>
-              <b>Olbia (SS)</b>
-            </div>
-          </div>
-        </div>-->
+      </div>
+      <div *ngIf="newBeaches.length === 0 && loaded">
+        <h4>Non ci sono spiagge che rispettano i criteri di ricerca.</h4>
+      </div>
+      <div *ngIf="newBeaches.length === 0 && !loaded">
+        <h4>Loading...</h4>
       </div>
       <div class="col-3 d-inline-flex">
         <h4>mappa</h4>
@@ -211,70 +166,3 @@
     </div>
   </div>
 </div>
-
-
-<!--
-<div class="container">
-  <h1 class="my-3">
-    Beaches list
-    <a [routerLink]="['../create']">
-      <i class="fas fa-plus-square" aria-hidden="true"></i>
-    </a>
-  </h1>
-
-  <div class="order-list my-3 text-right">
-    <h4 class="d-inline-block mr-2">Ordina per: </h4>
-    <form (change)="radioChange()">
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="park" name="radio" class="custom-control-input" value="park"
-               [(ngModel)]="radioValue">
-        <label class="custom-control-label" for="park">Parcheggio</label>
-      </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="summer_crowding" name="radio" class="custom-control-input" value="summer_crowding"
-               [(ngModel)]="radioValue">
-        <label class="custom-control-label" for="summer_crowding">Affollamento</label>
-      </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="traffic" name="radio" class="custom-control-input" value="traffic" [(ngModel)]="radioValue">
-        <label class="custom-control-label" for="traffic">Traffico</label>
-      </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="weather" name="radio" class="custom-control-input" value="weather" [(ngModel)]="radioValue">
-        <label class="custom-control-label" for="weather">Meteo</label>
-      </div>
-    </form>
-  </div>
-
-  <table *ngIf="loaded && beaches.length > 0" class="table">
-    <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Provincia</th>
-      <th>Latitudine</th>
-      <th>Longitudine</th>
-      <th>Orientamento</th>
-      <th>Traffico</th>
-      <th>Meteo</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="table-element cursor-pointer" *ngFor="let beach of beaches" (click)="goToDetails(beach.id)">
-      <td>{{ beach.name }}</td>
-      <td>{{ beach.province }}</td>
-      <td>{{ beach.latitude }}</td>
-      <td>{{ beach.longitude }}</td>
-      <td>{{ beach.orientation }}</td>
-      <td>
-        <div class="rounded-circle {{getTrafficClass(beach.traffic)}}"></div>
-      </td>
-      <td class="weather-icon"><img [src]="beach.weatherIcon" alt="meteo"></td>
-    </tr>
-    </tbody>
-  </table>
-
-  <h3 *ngIf="loaded && beaches.length === 0">Non ci sono ancora spiagge! Provvedi ad aggiungerne.</h3>
-
-  <h3 *ngIf="!loaded">Loading...</h3>
-</div>
--->

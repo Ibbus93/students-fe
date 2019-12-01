@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {BeachService} from '../../../shared/services/beaches.service';
-import {Beach} from '../../../shared/models/Beach';
+import {Beach, Orientation} from '../../../shared/models/Beach';
 import {WeatherService} from '../../../shared/services/weather.service';
 import {CurrentWeather} from '../../../shared/models/Meteo';
 import {TrafficService} from '../../../shared/services/traffic.service';
 import {Traffic} from '../../../shared/models/Traffic';
 import {Router} from '@angular/router';
 import {SortService} from '../../../shared/services/sort.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-beaches-list',
@@ -15,7 +16,12 @@ import {SortService} from '../../../shared/services/sort.service';
 })
 export class BeachesListComponent implements OnInit {
   beaches: Array<Beach> = [];
+  filteredBeaches: Array<Beach> = [];
   newBeaches = [];
+
+  orientationForm: FormGroup;
+  servicesForm: FormGroup;
+  crowdForm: FormGroup;
 
   tags: Array<String> = ['Relax', 'Avventura', 'Pedalò', 'Famiglia', 'Kayak', 'Ristorante', 'Cani ammessi'];
 
@@ -27,8 +33,28 @@ export class BeachesListComponent implements OnInit {
     private beachService: BeachService,
     private weatherService: WeatherService,
     private trafficService: TrafficService,
+    private formBuilder: FormBuilder,
     private router: Router
   ) {
+    this.orientationForm = this.formBuilder.group({
+      north: [true],
+      south: [true],
+      east: [true],
+      west: [true]
+    });
+
+    this.crowdForm = this.formBuilder.group({
+      affollata: [true],
+      frequentata: [true],
+      deserta: [true]
+    });
+
+    this.servicesForm = this.formBuilder.group({
+      park: [true],
+      food_service: [true],
+      lifeguard: [true],
+      dogs_allowed: [true]
+    });
   }
 
   ngOnInit() {
@@ -45,7 +71,8 @@ export class BeachesListComponent implements OnInit {
           }
 
           this.beaches = resBeaches;
-          this.setNewBeaches();
+          this.filteredBeaches = JSON.parse(JSON.stringify(this.beaches));
+          this.formatBeaches(this.filteredBeaches);
           this.loaded = true;
         }, err => {
           console.error(err);
@@ -84,11 +111,12 @@ export class BeachesListComponent implements OnInit {
     this.beaches = this.sortService.getSortedData(this.beaches, this.radioValue);
   };
 
-  setNewBeaches = () => {
+  formatBeaches = (beaches: Array<Beach>) => {
     const cols = 2;
+    this.newBeaches = [];
 
-    for (let i = 0; i < this.beaches.length; i += cols) {
-      this.newBeaches.push({items: this.beaches.slice(i, i + cols)});
+    for (let i = 0; i < beaches.length; i += cols) {
+      this.newBeaches.push({items: beaches.slice(i, i + cols)});
     }
   };
 
@@ -98,4 +126,35 @@ export class BeachesListComponent implements OnInit {
   getTrafficClass = (value: number) => value > 80 ? 'bg-danger' : (value > 50 && value < 80 ? 'bg-warning' : 'bg-success');
 
   goToDetails = (id: number) => this.router.navigate([`beaches/details/${id}`]);
+
+  filterBeaches = () => {
+    // const beaches: Array<Beach> = [];
+    const orientation = this.orientationForm.value;
+    const services = this.servicesForm.value;
+    const crowd = this.crowdForm.value;
+
+    // Order by orientation
+    this.filteredBeaches = this.beaches.filter(beach =>
+      (beach.orientation === Orientation.North && orientation.north)
+      || (beach.orientation === Orientation.South && orientation.south)
+      || (beach.orientation === Orientation.East && orientation.east)
+      || (beach.orientation === Orientation.West && orientation.west)
+    );
+
+    this.filteredBeaches = this.filteredBeaches.filter(beach =>
+      (beach.summer_crowding === 'Affollata' && crowd.affollata)
+      || (beach.summer_crowding === 'Deserta' && crowd.deserta)
+      || (beach.summer_crowding === 'Frequentata' && crowd.frequentata)
+    );
+
+    this.filteredBeaches = this.filteredBeaches.filter(beach =>
+      (beach.park && services.park)
+      || (beach.food_service && services.food_service)
+      || (beach.dogs_allowed && services.dogs_allowed)
+      || (beach.lifeguard && services.lifeguard)
+    );
+
+    this.formatBeaches(this.filteredBeaches);
+
+  };
 }
