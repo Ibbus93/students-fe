@@ -12,7 +12,7 @@ export interface Beach {
   food_service?: boolean;
   lifeguard?: boolean;
   dogs_allowed?: boolean;
-  summer_crowding?: boolean;
+  summer_crowding?: string;
   photo?: string;
   weatherIcon?: string;
   weather: CurrentWeather;

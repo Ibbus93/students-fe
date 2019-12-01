@@ -1,65 +1,168 @@
-<div class="container">
-  <h1 class="my-3">
-    Lista delle 10 spiagge migliori
-    <a [routerLink]="['../create']">
-      <i class="fas fa-plus-square" aria-hidden="true"></i>
-    </a>
-  </h1>
+<div class="d-flex flex-row h-100">
+  <div class="col-3 menu">
+    <div class="search-bar">
+      <input class="text-left" type="text" placeholder="Cerca spiagga o location">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="btn-group w-100" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-outline-secondary text-uppercase w-50 p-3 active">Turista</button>
+      <button type="button" class="btn btn-outline-secondary text-uppercase w-50 p-3">Surfer</button>
+    </div>
+    <div class="tag-list p-2">
+      <ng-container *ngFor="let tag of tags">
+        <span class="badge badge-light m-1">{{tag}}</span>
+      </ng-container>
+    </div>
+    <div class="filters mt-4">
+      <div class="p-2">
+        <span class="pl-3 text-uppercase text-secondary mb-2 font-weight-bolder">Filtra spiagge</span>
+      </div>
 
-  <div *ngIf="loaded" class="order-list my-3 text-right">
-    <h4 class="d-inline-block mr-2">Ordina per: </h4>
-    <form (change)="radioChange()">
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="park" name="radio" class="custom-control-input" value="park"
-               [(ngModel)]="radioValue">
-        <label class="custom-control-label" for="park">Parcheggio</label>
+      <div class="accordion" id="accordionExample" (change)="filterBeaches()">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                      aria-expanded="true" aria-controls="collapseOne">
+                Orientamento
+              </button>
+            </h2>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+            <form [formGroup]="orientationForm">
+              <div class="card-body">
+                <div class="form-check form-check-group">
+                  <input id="checkbox-occidentale" formControlName="west" type="checkbox">
+                  <label for="checkbox-occidentale">Occidentale</label>
+                </div>
+                <div class="form-check form-check-group">
+                  <input id="checkbox-meridionale" formControlName="south" type="checkbox">
+                  <label for="checkbox-meridionale">Meridionale</label>
+                </div>
+                <div class="form-check form-check-group">
+                  <input id="checkbox-orientale" formControlName="east" type="checkbox">
+                  <label for="checkbox-orientale">Orientale</label>
+                </div>
+                <div class="form-check form-check-group">
+                  <input id="checkbox-settentrionale" formControlName="north" type="checkbox">
+                  <label for="checkbox-settentrionale">Settentrionale</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                      aria-expanded="true" aria-controls="collapseTwo">
+                Affollamento
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo">
+            <div class="card-body">
+              <form [formGroup]="crowdForm">
+                <div class="form-check form-check-group">
+                  <input id="checkbox-affollata" formControlName="affollata" type="checkbox">
+                  <label for="checkbox-affollata">Affollata</label>
+                </div>
+                <div class="form-check form-check-group">
+                  <input id="checkbox-frequentata" formControlName="frequentata"type="checkbox">
+                  <label for="checkbox-frequentata">Frequentata</label>
+                </div>
+                <div class="form-check form-check-group">
+                  <input id="checkbox-deserta" formControlName="deserta" type="checkbox">
+                  <label for="checkbox-deserta">Deserta</label>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                      aria-expanded="false" aria-controls="collapseThree">
+                Servizi
+              </button>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
+            <div class="card-body">
+              <form [formGroup]="servicesForm">
+                <div class="form-check form-check-group">
+                  <input id="checkbox-park" formControlName="park" type="checkbox">
+                  <label for="checkbox-park">Parcheggio</label>
+                </div>
+                <div class="form-check form-check-group">
+                  <input id="checkbox-ristorazione" formControlName="food_service" type="checkbox">
+                  <label for="checkbox-ristorazione">Ristorazione</label>
+                </div>
+                <div class="form-check form-check-group">
+                  <input id="checkbox-bagnino" formControlName="lifeguard" type="checkbox">
+                  <label for="checkbox-bagnino">Bagnino</label>
+                </div>
+                <div class="form-check form-check-group">
+                  <input id="checkbox-cani" formControlName="dogs_allowed" type="checkbox">
+                  <label for="checkbox-cani">Cani ammessi</label>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="summer_crowding" name="radio" class="custom-control-input" value="summer_crowding"
-               [(ngModel)]="radioValue">
-        <label class="custom-control-label" for="summer_crowding">Affollamento</label>
-      </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="traffic" name="radio" class="custom-control-input" value="traffic" [(ngModel)]="radioValue">
-        <label class="custom-control-label" for="traffic">Traffico</label>
-      </div>
-      <div class="custom-control custom-radio custom-control-inline">
-        <input type="radio" id="weather" name="radio" class="custom-control-input" value="weather" [(ngModel)]="radioValue">
-        <label class="custom-control-label" for="weather">Meteo</label>
-      </div>
-    </form>
+
+    </div>
   </div>
-
-  <table *ngIf="loaded && beaches.length > 0" class="table">
-    <thead>
-    <tr class="text-center">
-      <th>Nome</th>
-      <th>Città</th>
-      <th>Posizione</th>
-      <th>Orientamento</th>
-      <th>Parcheggio</th>
-      <th>Affollamento</th>
-      <th>Traffico</th>
-      <th>Meteo</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="table-element cursor-pointer text-center" *ngFor="let beach of beaches.slice(0, 10)" (click)="goToDetails(beach.id)">
-      <td>{{ beach.name }}</td>
-      <td>{{ beach.city + ' (' + beach.province + ')' }}</td>
-      <td>{{ beach.latitude + ', ' + beach.longitude }}</td>
-      <td><i class="fas fa-2x {{ getOrientationArrow(beach.orientation) }}"></i></td>
-      <td class="text-center"><i class="fas fa-2x {{getInfoClass(beach.park)}}"></i></td>
-      <td><i class="fas fa-2x {{getInfoClass(beach.summer_crowding)}}"></i></td>
-      <td>
-        <div class="rounded-circle m-auto text-center {{getTrafficClass(beach.traffic)}}"><p>{{beach.traffic}}</p></div>
-      </td>
-      <td class="weather-icon"><img [src]="beach.weatherIcon" alt="meteo"></td>
-    </tr>
-    </tbody>
-  </table>
-
-  <h3 *ngIf="loaded && beaches.length === 0">Non ci sono ancora spiagge! Provvedi ad aggiungerne.</h3>
-
-  <h3 *ngIf="!loaded">Loading...</h3>
+  <div class="col-9">
+    <div class="summary px-2 pt-4 pb-2">
+      <h5 class="mt-4 pl-3 text-secondary">Sei nei pressi di
+        <u class="mr-2 font-weight-bold text-dark ">spiagga Sotto Torre</u>
+        <i class="fa fa-arrow-circle-right"></i>
+      </h5>
+      <div class="meteo flex-row text-secondary">
+        <div class="col-8 d-inline-flex">
+          <div class="d-inline-flex mr-4">
+            <span class="text-uppercase mr-2">Oggi</span>
+            <b>+14°C</b>
+          </div>
+          <div class="d-inline-flex mr-4">
+            <span class="text-uppercase mr-2">Pioggia</span>
+            <b>4.8 mm</b>
+          </div>
+          <div class="d-inline-flex mr-4">
+            <span class="text-uppercase mr-2">Vento</span>
+            <b>12 m/s</b>
+          </div>
+        </div>
+        <button class="btn" [routerLink]="['../create']">Aggiungi spiaggia</button>
+      </div>
+    </div>
+    <div class="flex-row mt-4 d-inline-flex beach-list">
+      <div *ngIf="newBeaches.length > 0" class="col-9">
+        <div class="row" *ngFor="let row of newBeaches">
+          <ng-container *ngFor="let beach of row?.items">
+            <div class="beach w-50 p-2 position-relative" (click)="goToDetails(beach.id)">
+              <img [alt]="beach.name" [src]="beach.photo"/>
+              <div class="img-caption">
+                <h4 class="d-block mb-0">{{beach.name}}</h4>
+                <b>{{beach.city}} ({{beach.province}})</b>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div *ngIf="newBeaches.length === 0 && loaded">
+        <h4>Non ci sono spiagge che rispettano i criteri di ricerca.</h4>
+      </div>
+      <div *ngIf="newBeaches.length === 0 && !loaded">
+        <h4>Loading...</h4>
+      </div>
+      <div class="col-3 d-inline-flex">
+        <h4>mappa</h4>
+      </div>
+    </div>
+  </div>
 </div>
