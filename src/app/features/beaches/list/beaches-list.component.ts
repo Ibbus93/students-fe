@@ -15,6 +15,7 @@ import {SortService} from '../../../shared/services/sort.service';
 })
 export class BeachesListComponent implements OnInit {
   beaches: Array<Beach> = [];
+  newBeaches = [];
 
   tags: Array<String> = ['Relax', 'Avventura', 'Pedalò', 'Famiglia', 'Kayak', 'Ristorante', 'Cani ammessi'];
 
@@ -31,7 +32,7 @@ export class BeachesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.loadComponent();
+    this.loadComponent();
   }
 
   loadComponent = () => {
@@ -44,6 +45,7 @@ export class BeachesListComponent implements OnInit {
           }
 
           this.beaches = resBeaches;
+          this.setNewBeaches();
           this.loaded = true;
         }, err => {
           console.error(err);
@@ -82,6 +84,13 @@ export class BeachesListComponent implements OnInit {
     this.beaches = this.sortService.getSortedData(this.beaches, this.radioValue);
   };
 
+  setNewBeaches = () => {
+    const cols = 2;
+
+    for (let i = 0; i < this.beaches.length; i += cols) {
+      this.newBeaches.push({items: this.beaches.slice(i, i + cols)});
+    }
+  };
 
 
   getWeatherIconPath = (icon: string): string => `https://www.weatherbit.io/static/img/icons/${icon}.png`;

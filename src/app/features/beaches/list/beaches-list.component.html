@@ -137,12 +137,26 @@
             <b>12 m/s</b>
           </div>
         </div>
-        <button class="btn">Aggiungi spiaggia</button>
+        <button class="btn" [routerLink]="['../create']">Aggiungi spiaggia</button>
       </div>
     </div>
     <div class="flex-row mt-4 d-inline-flex beach-list">
-      <div class="col-9">
-        <div class="row">
+      <div *ngIf="newBeaches.length > 0" class="col-9">
+        <div class="row" *ngFor="let row of newBeaches">
+          <ng-container *ngFor="let beach of row?.items">
+            <div class="beach w-50 p-2 position-relative" (click)="goToDetails(beach.id)">
+              <img [alt]="beach.name" [src]="beach.photo"/>
+              <div class="img-caption">
+                <h4 class="d-block mb-0">{{beach.name}}</h4>
+                <b>{{beach.city}} ({{beach.province}})</b>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div *ngIf="newBeaches.length === 0">
+          <h4>Loading ...</h4>
+        </div>
+        <!--<div class="row">
           <div class="w-50 p-2 position-relative">
             <img class="img-fluid" src="https://media-cdn.tripadvisor.com/media/photo-s/10/b7/d1/19/cala-banana.jpg"/>
             <div class="img-caption">
@@ -189,7 +203,7 @@
               <b>Olbia (SS)</b>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
       <div class="col-3 d-inline-flex">
         <h4>mappa</h4>

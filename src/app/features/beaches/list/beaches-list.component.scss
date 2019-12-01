@@ -1,6 +1,5 @@
 div.d-flex {
   background-color: #f2f2f2;
-  height: 100vh;
   padding: 0;
 
   div.menu {
@@ -130,6 +129,20 @@ div.d-flex {
   div.beach-list {
     img {
       border-radius: 1rem;
+      width: 100%;
+      height: 200px;
+    }
+
+    .beach {
+      max-height: 220px;
+      cursor: pointer;
+      
+      &:hover {
+        .img-caption {
+          color: white;
+          background-color: #363636;
+        }
+      }
     }
 
     .img-caption {
@@ -143,6 +156,7 @@ div.d-flex {
       right: 0.5rem;
       border-radius: 0 0 1rem 1rem;
     }
+    
 
   }
 }
